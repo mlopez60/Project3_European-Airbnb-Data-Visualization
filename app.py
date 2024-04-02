@@ -1,6 +1,7 @@
 # example
 from flask import Flask, render_template, jsonify
 import sqlite3
+import csv
 
 app = Flask(__name__)
 
@@ -22,20 +23,21 @@ def create_table():
 
 # Function to insert dummy data into the database
 def insert_dummy_data():
-    # with open('filename.csv', 'r') as fin:
-    #     dr = csv.DictReader(fin)
-    #     airbnbdata = [i['col1], i['col2'] for i in dr]
+    with open('Resources/rental_data.csv', 'r') as fin:
+        dr = csv.DictReader(fin)
+        airbnbdata = [(i['city'], i['rental_period'],i['id'], i['rental_price'], i['room_type'], i['room_shared'], i['room_private'], i['person_capacity'], i['host_is_superhost'], i['multi'], i['biz'], i['cleanliness_rating'], i['guest_satisfaction_overall'], i['bedrooms'], i['dist'], i['metro_dist'], i['attr_index'], i['attr_index_norm'], i['rest_index'], i['rest_index_norm'], i['lng'], i['lat']) for i in dr]
+        # print(airbnbdata).columns
 
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
-    # update below to allow insertable data
-    # cursor.executemany('INSERT INTO data (col1, col2, col3, col4, coletc) VALUES (?, ?, ?, ?)', airbnbdata)
+    # update below
+    cursor.executemany("INSERT INTO data (city, rental_period, id, rental_price, room_type, room_shared, room_private, person_capacity, host_is_superhost, multi, biz, cleanliness_rating, guest_satisfaction_overall,bedrooms, dist, metro_dist, attr_index, attr_index_norm, rest_index, rest_index_norm, lng, lat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", airbnbdata)
     conn.commit()
     conn.close()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 @app.route('/data')
 def get_data():
