@@ -15,8 +15,28 @@ def create_table():
     
     # Create a new table
     cursor.execute('''CREATE TABLE data
-                      (x INTEGER NOT NULL,
-                       y INTEGER NOT NULL)''')
+                      (city VARCHAR,
+                       rental_period VARCHAR,
+                       id DECIMAL,
+                       rental_price DECIMAL,
+                       room_type VARCHAR,
+                       room_shared BOOLEAN,
+                       room_private BOOLEAN,
+                       person_capacity DECIMAL,
+                       host_is_superhost BOOLEAN,
+                       multi BOOLEAN,
+                       biz BOOLEAN,
+                       cleanliness_rating DECIMAL,
+                       guest_satisfaction_overall DECIMAL,
+                       bedrooms DECIMAL,
+                       dist DECIMAL,
+                       metro_dist DECIMAL,
+                       attr_index DECIMAL,
+                       attr_index_norm DECIMAL,
+                       rest_index DECIMAL,
+                       rest_index_norm DECIMAL,
+                       lng DECIMAL,
+                       lat DECIMAL)''')
     
     conn.commit()
     conn.close()
