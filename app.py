@@ -22,10 +22,14 @@ def create_table():
 
 # Function to insert dummy data into the database
 def insert_dummy_data():
+    # with open('filename.csv', 'r') as fin:
+    #     dr = csv.DictReader(fin)
+    #     airbnbdata = [i['col1], i['col2'] for i in dr]
+
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
     # update below to allow insertable data
-    # cursor.executemany('INSERT INTO data (x, y) VALUES (?, ?)', [(i, i*i) for i in range(10)])
+    # cursor.executemany('INSERT INTO data (col1, col2, col3, col4, coletc) VALUES (?, ?, ?, ?)', airbnbdata)
     conn.commit()
     conn.close()
 
