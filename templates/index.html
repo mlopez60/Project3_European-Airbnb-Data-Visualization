@@ -23,14 +23,112 @@
 
     <!-- using jinja templating to read in plots.js -->
     <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
-    
+
+    <style>
+        /* CSS styles for h1 element */
+        h1 {
+          color: navy; /* Text color */
+          font-size: 48px; /* Font size */
+          font-family: "Julius Sans One", sans-serif; /* Font family */
+          text-align: center; /* Text alignment */
+        }
+      
+        /* CSS styles for p element */
+        p {
+          color: rgb(0, 9, 128); /* Text color */
+          font-size: 24px; /* Font size */
+          font-family: "Julius Sans One", sans-serif; /* Font family */
+          text-align: center; /* Text alignment */
+          line-height: 1.5; /* Line height */
+        }
+
+        .container {
+  display: flex; /* Use flexbox layout */
+  justify-content: center; /* Align items horizontally to the center */
+}
+
+label {
+    padding: 5px; /* Adjust padding as needed */
+  font-size: 16px; /* Font size */
+  font-family: "Julius Sans One", sans-serif; /* Font family */
+  color: #333; /* Text color */
+}
+/* CSS styles for select elements */
+select {
+  padding: 10px; /* Adjust padding as needed */
+  font-size: 16px; /* Font size */
+  font-family: "Julius Sans One", sans-serif; /* Font family */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 5px; /* Border radius */
+  background-color: #fff; /* Background color */
+  color: #333; /* Text color */
+  width: auto; /* Width of the select element */
+  margin: 0 10px; /* Add space between selects */
+}
+
+/* Style select element when hovered */
+select:hover {
+  border-color: #999; /* Change border color on hover */
+}
+
+/* Style select element when focused */
+select:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #555; /* Change border color when focused */
+}
+      </style>
 
 </head>
-
 <body>
 
-    <!-- The div where we'll insert our map -->
-    <div id="map"></div>
+    <h1>Airbnb Rentals for 10 Major European Cities </h1>
+    <p>Select from dropdown City and Rental Period</p>
+    <div class="container">
+        <!-- First dropdown select -->
+        <label for="city">Choose a city:</label>
+        <select id="city">
+        <option value="Amsterdam">Amsterdam</option>
+        <option value="Athens">Athens</option>
+        <option value="Barcelona">Barcelona</option>
+        <option value="Berlin">Berlin</option>
+        <option value="Budapest">Budapest</option>
+        <option value="Lisbon">Lisbon</option>
+        <option value="London">London</option>
+        <option value="Paris">Paris</option>
+        <option value="Rome">Rome</option>
+        <option value="Vienna">Vienna</option>
+    </select>
+
+    <label for="rental_period">Choose a rental period:</label>
+    <select id="rental_period">
+        <option value="weekday">Weekdays</option>
+        <option value="weekend">Weekends</option>
+    </select>
+
+    <label for="room_type">Choose a rental type:</label>
+    <select id="room_type">
+        <option value="Entire home/apt">Entire home/apt</option>
+        <option value="Private room">Private room</option>
+        <option value="Shared room">Shared room</option>
+    </select>
+
+    <label for="host_is_superhost">Superhost?:</label>
+    <select id="host_is_superhost">
+        <option value="t">Yes</option>
+        <option value="f">No</option>
+    </select>
+
+    <label for="person_capacity">Person Capacity:</label>
+    <select id="person_capacity">
+        <option value=">=2">2+</option>
+        <option value=">=3">3+</option>
+        <option value=">=4">4+</option>
+        <option value=">=5">5+</option>
+        <option value="=6">6</option>
+    </select>
+        
+    <div id="chart"></div>
+
     
 </body>
 
