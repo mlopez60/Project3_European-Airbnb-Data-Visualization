@@ -1,20 +1,36 @@
-// example
+// Paris Test
 fetch('/data')
     .then(response => response.json())
     .then(data => {
-        const trace = {
-            x: data.map(row => row[0]),
-            y: data.map(row => row[1]),
-            type: 'scatter',
-        };
-        const layout = {
-            title: 'Data from SQLite Database',
-            xaxis: {
-                title: 'X-axis Label'
-            },
-            yaxis: {
-                title: 'Y-axis Label'
+
+/*
+        data.forEach(function(data) {
+            if (data[0] == "Paris") {
+
+                console.log(data)
+
             }
-        };
-        Plotly.newPlot('chart', [trace], layout);
-    });
+        })
+*/
+        ///*
+        // Create a map object.
+        let myMap = L.map("map", {
+            center: [48.8566, 2.3522],
+            zoom: 11
+        });
+        
+        // Add a tile layer.
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(myMap);
+        
+        // Loop through the array.
+        data.forEach(function(row) {
+            if (row[0] == "Paris") {
+                L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: ${row[3]}</h3>`).addTo(myMap)
+            }
+
+        });
+        //*/
+        
+    });// end of data fetch
