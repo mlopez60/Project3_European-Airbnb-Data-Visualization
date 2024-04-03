@@ -55,9 +55,9 @@ def insert_dummy_data():
     conn.commit()
     conn.close()
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/data')
 def get_data():
