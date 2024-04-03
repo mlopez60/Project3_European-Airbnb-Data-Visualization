@@ -9,6 +9,26 @@
     <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
 </head>
 <body>
+    <h1>Airbnb Rentals for 10 Major European Cities </h1>
+    <p>Select from dropdown City and Rental Period</p>
+    <select id="selDataset">
+        <option value="Amsterdam">Amsterdam</option>
+        <option value="Athens">Athens</option>
+        <option value="Barcelona">Barcelona</option>
+        <option value="Berlin">Berlin</option>
+        <option value="Budapest">Budapest</option>
+        <option value="Lisbon">Lisbon</option>
+        <option value="London">London</option>
+        <option value="Paris">Paris</option>
+        <option value="Rome">Rome</option>
+        <option value="Vienna">Vienna</option>
+    </select>
+
+    <select id2="selDataset">
+        <option value="weekday">Weekdays</option>
+        <option value="weekend">Weekends</option>
+    </select>
+        
     <div id="chart"></div>
     
 </body>
