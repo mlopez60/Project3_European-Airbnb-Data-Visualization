@@ -26,8 +26,14 @@ fetch('/data')
         
         // Loop through the array.
         data.forEach(function(row) {
-            if (row[0] == "Paris") {
-                L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: ${row[3]}</h3>`).addTo(myMap)
+            if (row[0] == "Paris" && 
+                row[1] == "weekday" && 
+                row[4] == "Private room" && 
+                row[7] > 2 && 
+                row[8] == "t") {
+
+                L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: $${row[3].toFixed(2)}</h3>`).addTo(myMap)
+                
             }
 
         });
