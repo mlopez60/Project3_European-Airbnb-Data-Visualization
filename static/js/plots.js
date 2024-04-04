@@ -21,11 +21,11 @@ fetch('/data')
             data.forEach(function(row) {
 
                 // conditionals applied from drop-down menu
-                if (row[0] == document.getElementById("city") && // city
-                    row[1] == document.getElementById("rental_period") && // rental_period
-                    row[4] == document.getElementById("room_type") && // room_type
-                    row[7] == document.getElementById("host_is_superhost") && // person_capacity
-                    row[8] == document.getElementById("person_capacity")) // super-host
+                if (row[0] == document.getElementById("city").value && // city
+                    row[1] == document.getElementById("rental_period").value && // rental_period
+                    row[4] == document.getElementById("room_type").value && // room_type
+                    row[7] == document.getElementById("person_capacity").value && // person_capacity
+                    row[8] == document.getElementById("host_is_superhost").value) // super-host
                 {
     
                     L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: $${row[3].toFixed(2)}</h3>`).addTo(myMap)
@@ -38,6 +38,5 @@ fetch('/data')
 
         const button = document.querySelector('button');
         button.addEventListener('click', onButtonClick);
-        //*/
         
     });// end of data fetch
