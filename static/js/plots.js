@@ -1,25 +1,34 @@
-// Paris Test
 fetch('/data')
     .then(response => response.json())
     .then(data => {
 
         // Create a map object.
         let myMap = L.map("map", {
-            center: [48.8566, 2.3522],
-            zoom: 12
-            });
+            center: [45.4642, 9.1900],
+            zoom: 5
+        });
 
-        // Add a tile layer.
+        // Add a tile layer with English labels only.
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19,
+            language: 'en' // Specify the language for labels
         }).addTo(myMap);
-        
+
+        L.circle([52.36857095042522, 4.900577232906863]).bindPopup(`<h2>Amsterdam</h2>`).addTo(myMap);
+        L.circle([38.7233, -9.1371]).bindPopup(`<h2>Lisbon</h2>`).addTo(myMap);
+        L.circle([52.5226, 13.401]).bindPopup(`<h2>Berlin</h2>`).addTo(myMap);
+        L.circle([ 41.3871, 2.1703]).bindPopup(`<h2>Barcelona</h2>`).addTo(myMap);
+        L.circle([37.98122394428812, 23.734047028545326]).bindPopup(`<h2>Athens</h2>`).addTo(myMap);
+        L.circle([51.50658904579564, -0.1265604393151295]).bindPopup(`<h2>London</h2>`).addTo(myMap);
+        L.circle([41.8966659495316, 12.48105435763796]).bindPopup(`<h2>Rome</h2>`).addTo(myMap);
+        L.circle([48.207775815017676, 16.37129928548204]).bindPopup(`<h2>Vienna</h2>`).addTo(myMap);
+        L.circle([48.8566, 2.3522]).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
+        L.circle([47.49640911675406, 19.052025412029728]).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
         
         function onButtonClick() {
-
             // Loop through the array.
             data.forEach(function(row) {
-
                 // conditionals applied from drop-down menu
                 if (row[0] == document.getElementById("city").value && // city
                     row[1] == document.getElementById("rental_period").value && // rental_period
@@ -27,16 +36,37 @@ fetch('/data')
                     row[7] == document.getElementById("person_capacity").value && // person_capacity
                     row[8] == document.getElementById("host_is_superhost").value) // super-host
                 {
-    
-                    L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: $${row[3].toFixed(2)}</h3>`).addTo(myMap)
-                    
+                    L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: $${row[3].toFixed(2)}</h3>`).addTo(myMap);
                 }
 
-          })
+                //map.fitBounds(myFGMarker.getBounds())
+            });
+        } // end of onButtonClick
 
-        } // end of button
+        function clearMarkers() {
+            myMap.eachLayer(function(layer) {
+                if (layer instanceof L.Marker) {
+                    myMap.removeLayer(layer);
+                }
+            });
+        }
+
+        function clearConditionals() {
+            // Clear or reset the dropdown menus to their default values
+            document.getElementById("city").value = ""; // Replace "" with the default value for city dropdown
+            document.getElementById("rental_period").value = ""; // Replace "" with the default value for rental_period dropdown
+            document.getElementById("room_type").value = ""; // Replace "" with the default value for room_type dropdown
+            document.getElementById("host_is_superhost").value = ""; // Replace "" with the default value for host_is_superhost dropdown
+            document.getElementById("person_capacity").value = ""; // Replace "" with the default value for person_capacity dropdown
+            
+            // Remove all markers from the map
+            clearMarkers();
+        }
 
         const button = document.querySelector('button');
         button.addEventListener('click', onButtonClick);
+
+        const clearButton = document.getElementById('clearButton');
+        clearButton.addEventListener('click', clearConditionals);
         
-    });// end of data fetch
+    }); // end of data fetch

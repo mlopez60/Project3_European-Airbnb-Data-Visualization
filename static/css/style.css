@@ -5,13 +5,10 @@ body {
 }
 
 /* Set map, body, and html to 100% of the screen size. */
-#map,
-html {
-  height: 95vh;
+#map{
+  height: 750px;
   width: 100%;
 }
-body,
-h1 {
-  text-align: center;
-}
+
+
 
