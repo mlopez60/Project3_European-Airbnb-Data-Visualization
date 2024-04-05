@@ -41,6 +41,7 @@ fetch('/data')
 
                 //map.fitBounds(myFGMarker.getBounds())
             });
+            myMap.setView(changeMap(document.getElementById("city").value), 10)
         } // end of onButtonClick
 
         function clearMarkers() {
@@ -62,6 +63,40 @@ fetch('/data')
             // Remove all markers from the map
             clearMarkers();
         }
+
+        function changeMap(city){
+            if (city == 'Amsterdam') {
+                return  (new L.LatLng(52.47357811863962, 5.013054787903982))
+                    }
+                else if (city == 'Athens') {
+                    return  (new L.LatLng(37.98122394428812, 23.734047028545326))
+                    }
+                else if (city == 'Barcelona') {
+                    return  (new L.LatLng(41.38713904783096, 2.1703350990459405))
+                }   
+                else if (city == 'Berlin') {
+                    return  (new L.LatLng(52.52268813158208, 13.401958119217134))
+                }   
+                else if (city == 'Budapest') {
+                    return  (new L.LatLng(47.624155538447845, 18.85045239184864))
+                }   
+                else if (city == 'Lisbon') {
+                    return  (new L.LatLng(38.72335413778281, -9.137145621842837))
+                }   
+                else if (city == 'London') {
+                    return  (new L.LatLng(51.5072, 0.1276))
+                }   
+                else if (city == 'Paris') {
+                    return  (new L.LatLng(48.8566,2.3522))
+                }   
+                else if (city == 'Rome') {
+                    return  (new L.LatLng(41.8966659495316, 12.48105435763796))
+                }   
+                else if (city == 'Vienna') {
+                    return  (new L.LatLng(48.279458421240086, 16.394877910070342))
+                  };
+    
+            }
 
         const button = document.querySelector('button');
         button.addEventListener('click', onButtonClick);
