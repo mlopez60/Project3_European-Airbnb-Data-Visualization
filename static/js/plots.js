@@ -59,7 +59,7 @@ fetch('/data')
             document.getElementById("room_type").value = ""; // Replace "" with the default value for room_type dropdown
             document.getElementById("host_is_superhost").value = ""; // Replace "" with the default value for host_is_superhost dropdown
             document.getElementById("person_capacity").value = ""; // Replace "" with the default value for person_capacity dropdown
-            
+            myMap.setView(new L.LatLng(45.4642, 9.1900), 5)
             // Remove all markers from the map
             clearMarkers();
         }
