@@ -76,6 +76,10 @@ select:focus {
   outline: none; /* Remove default focus outline */
   border-color: #555; /* Change border color when focused */
 }
+.button-container {
+  padding: 10px;  
+  text-align: center;
+}
       </style>
 
 </head>
@@ -83,11 +87,12 @@ select:focus {
 
     <h1>Airbnb Rentals for 10 Major European Cities </h1>
     <br>
-    <p>Select from dropdown City and Rental Period</p>
+    <p>Select search criteria from drop down menus below</p>
     <div class="container">
         <!-- First dropdown select -->
         <label for="city">Choose a city:</label>
         <select id="city">
+        <option value="">Selection Required*</option>
         <option value="Amsterdam">Amsterdam</option>
         <option value="Athens">Athens</option>
         <option value="Barcelona">Barcelona</option>
@@ -102,12 +107,14 @@ select:focus {
 
     <label for="rental_period">Choose a rental period:</label>
     <select id="rental_period">
+        <option value="">Selection Required*</option>
         <option value="weekday">Weekdays</option>
         <option value="weekend">Weekends</option>
     </select>
 
     <label for="room_type">Choose a rental type:</label>
     <select id="room_type">
+        <option value="">Selection Required*</option>
         <option value="Entire home/apt">Entire home/apt</option>
         <option value="Private room">Private room</option>
         <option value="Shared room">Shared room</option>
@@ -115,21 +122,25 @@ select:focus {
 
     <label for="host_is_superhost">Superhost?:</label>
     <select id="host_is_superhost">
+        <option value="">Selection Required*</option>
         <option value="t">Yes</option>
         <option value="f">No</option>
     </select>
 
     <label for="person_capacity">Person Capacity:</label>
     <select id="person_capacity">
-        <option value="2">2</option>
+       <option value="">Selection Required*</option>
+       <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
         <option value="6">6</option>
     </select></div>
 
-    <button class="button" type="button">View Airbnbs</button>
-    <button id="clearButton">Clear</button>
+    <div class="button-container">
+      <button id="button">View Airbnbs</button>
+      <button id="clearButton">Clear</button>
+  </div>
 
     <br>
         

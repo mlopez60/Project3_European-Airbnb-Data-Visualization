@@ -36,7 +36,7 @@ fetch('/data')
                     row[7] == document.getElementById("person_capacity").value && // person_capacity
                     row[8] == document.getElementById("host_is_superhost").value) // super-host
                 {
-                    L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: $${row[3].toFixed(2)}</h3>`).addTo(myMap);
+                    L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: &euro;${row[3].toFixed(2)}</h3>`).addTo(myMap);
                 }
 
                 //map.fitBounds(myFGMarker.getBounds())
