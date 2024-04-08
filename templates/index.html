@@ -24,6 +24,11 @@
     <!-- using jinja templating to read in plots.js -->
     <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
 
+    <!-- Include your JavaScript file -->
+    <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         /* CSS styles for h1 element */
         h1 {
@@ -143,8 +148,11 @@ select:focus {
   </div>
 
     <br>
+    <canvas id="myChart" width="50" height="50"></canvas>
         
     <div id="map"></div>
+
+    <script src="plots.js"></script>
 
 </body>
 
