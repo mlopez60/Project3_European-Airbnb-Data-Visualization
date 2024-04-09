@@ -106,31 +106,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Extract rental price and distance data from CSV data
             data.forEach(row => {
-                rentalPrices.push(row[3]);
                 distances.push(row[15]);
+                rentalPrices.push(row[3]);
             });
 
             // Get canvas element to render the scatter plot
             const ctx = document.getElementById('myChart').getContext('2d');
 
             // Create scatter chart
+            // Specify the desired width and height of the chart
+            const chartWidth = 2500;
+            const chartHeight = 800;
+
             const scatterChart = new Chart(ctx, {
                 type: 'scatter',
                 data: {
                     datasets: [{
-                        label: 'Rental Price vs Distance',
-                        data: rentalPrices.map((value, index) => ({ x: value, y: distances[index] })),
+                        label: 'Rental Price vs Distance to City Center',
+                        data: distances.map((value, index) => ({ x: value, y: rentalPrices[index] })),
                         backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
                     }]
                 },
                 options: {
+                    // Set the desired width and height of the chart
+                    maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
+                    responsive: false, // Disable responsiveness
+                    width: chartWidth,
+                    height: chartHeight,
                     scales: {
                         x: {
                             type: 'linear',
                             position: 'bottom',
                             title: {
                                 display: true,
-                                text: 'Rental Price'
+                                text: 'Distance (meters)'
                             }
                         },
                         y: {
@@ -138,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             position: 'left',
                             title: {
                                 display: true,
-                                text: 'Distance'
+                                text: 'Rental Price'
                             }
                         }
                     }
