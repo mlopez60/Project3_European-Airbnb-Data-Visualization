@@ -19,16 +19,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 language: 'en' // Specify the language for labels
             }).addTo(myMap);
 
-            L.circle([52.36857095042522, 4.900577232906863]).bindPopup(`<h2>Amsterdam</h2>`).addTo(myMap);
-            L.circle([38.7233, -9.1371]).bindPopup(`<h2>Lisbon</h2>`).addTo(myMap);
-            L.circle([52.5226, 13.401]).bindPopup(`<h2>Berlin</h2>`).addTo(myMap);
-            L.circle([41.3871, 2.1703]).bindPopup(`<h2>Barcelona</h2>`).addTo(myMap);
-            L.circle([37.98122394428812, 23.734047028545326]).bindPopup(`<h2>Athens</h2>`).addTo(myMap);
-            L.circle([51.50658904579564, -0.1265604393151295]).bindPopup(`<h2>London</h2>`).addTo(myMap);
-            L.circle([41.8966659495316, 12.48105435763796]).bindPopup(`<h2>Rome</h2>`).addTo(myMap);
-            L.circle([48.207775815017676, 16.37129928548204]).bindPopup(`<h2>Vienna</h2>`).addTo(myMap);
-            L.circle([48.8566, 2.3522]).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
-            L.circle([47.49640911675406, 19.052025412029728]).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
+            L.circle([52.36857095042522, 4.900577232906863], { radius: 10000 }).bindPopup(`<h2>Amsterdam</h2>`).addTo(myMap);
+            L.circle([38.7233, -9.1371], { radius: 10000 }).bindPopup(`<h2>Lisbon</h2>`).addTo(myMap);
+            L.circle([52.5226, 13.401], { radius: 10000 }).bindPopup(`<h2>Berlin</h2>`).addTo(myMap);
+            L.circle([41.3871, 2.1703], { radius: 10000 }).bindPopup(`<h2>Barcelona</h2>`).addTo(myMap);
+            L.circle([37.98122394428812, 23.734047028545326], { radius: 10000 }).bindPopup(`<h2>Athens</h2>`).addTo(myMap);
+            L.circle([51.50658904579564, -0.1265604393151295], { radius: 10000 }).bindPopup(`<h2>London</h2>`).addTo(myMap);
+            L.circle([41.8966659495316, 12.48105435763796], { radius: 10000 }).bindPopup(`<h2>Rome</h2>`).addTo(myMap);
+            L.circle([48.207775815017676, 16.37129928548204], { radius: 10000 }).bindPopup(`<h2>Vienna</h2>`).addTo(myMap);
+            L.circle([48.8566, 2.3522], { radius: 10000 }).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
+            L.circle([47.49640911675406, 19.052025412029728], { radius: 10000 }).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
+            L.circle([52.36857095042522, 4.900577232906863], {color: 'red'}).bindPopup(`<h2>Amsterdam</h2>`).addTo(myMap);
+            L.circle([38.7233, -9.1371], {color: 'red'}).bindPopup(`<h2>Lisbon</h2>`).addTo(myMap);
+            L.circle([52.5226, 13.401], {color: 'red'}).bindPopup(`<h2>Berlin</h2>`).addTo(myMap);
+            L.circle([41.3871, 2.1703], {color: 'red'}).bindPopup(`<h2>Barcelona</h2>`).addTo(myMap);
+            L.circle([37.98122394428812, 23.734047028545326], {color: 'red'}).bindPopup(`<h2>Athens</h2>`).addTo(myMap);
+            L.circle([51.50658904579564, -0.1265604393151295], {color: 'red'}).bindPopup(`<h2>London</h2>`).addTo(myMap);
+            L.circle([41.8966659495316, 12.48105435763796], {color: 'red'}).bindPopup(`<h2>Rome</h2>`).addTo(myMap);
+            L.circle([48.207775815017676, 16.37129928548204], {color: 'red'}).bindPopup(`<h2>Vienna</h2>`).addTo(myMap);
+            L.circle([48.8566, 2.3522], {color: 'red'}).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
+            L.circle([47.49640911675406, 19.052025412029728], {color: 'red'}).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
             
             function onButtonClick() {
                 // Loop through the array.
@@ -56,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             row[7] == document.getElementById("person_capacity").value && // person_capacity
                             row[8] == document.getElementById("host_is_superhost").value) // super-host
                           { 
-                            rentalPrices.push(row[3]);
-                            distances.push(row[15]);}
+                            distances.push(row[15]);
+                            rentalPrices.push(row[3]);}
                         });
 
                         // Get canvas element to render the scatter plot
@@ -68,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             type: 'scatter',
                             data: {
                                 datasets: [{
-                                    label: 'Rental Price vs Distance',
-                                    data: rentalPrices.map((value, index) => ({ x: value, y: distances[index] })),
+                                    label: 'Rental Price vs Distance to City Center',
+                                    data: distances.map((value, index) => ({ x: value, y: rentalPrices[index] })),
                                     backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
                                 }]
                             },
@@ -85,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         position: 'bottom',
                                         title: {
                                             display: true,
-                                            text: 'Rental Price'
+                                            text: 'Distance (meters)'
                                         }
                                     },
                                     y: {
@@ -93,14 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         position: 'left',
                                         title: {
                                             display: true,
-                                            text: 'Distance'
+                                            text: 'Rental Prices (for two nights)'
                                         }
                                     }
                                 }
                             }
                         });
                     }
-                myMap.setView(changeMap(document.getElementById("city").value), 10)
+                myMap.setView(changeMap(document.getElementById("city").value), 12)
                 });
 
             // myMap.setView(changeMap(document.getElementById("city").value), 10)
