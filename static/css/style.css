@@ -4,30 +4,59 @@ body {
   margin: 0;
 }
 
-/* Set map, body, and html to 100% of the screen size. */
-#map{
-  height: 650px;
-  width: 975px;
-  border-style: solid;
-}
-
+/* Adjust the width of the left and right boxes */
 #leftbox {
   float: left;
   background: white;
-  width: 65%;
+  width: 50%;
   height: 650px;
+  display: flex; /* Use flexbox layout */
+  justify-content: center; /* Align content horizontally to the center */
+  align-items: center; /* Align content vertically to the center */
 }
 
 #rightbox {
   float: right;
   background: white;
-  width: 34%;
+  width: 50%;
   height: 650px;
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Align content horizontally to the center */
+  align-items: center; /* Align content vertically to the center */
 }
+
+/* Adjust the size of the map container */
+#map{
+  height: 600px; /* Adjust the height of the map as needed */
+  width: 90%; /* Adjust the width of the map container */
+  border-style: solid;
+}
+
+/* Adjust the size of the chart containers */
+#myChart,
+#myChart2 {
+  width: 90%; /* Adjust the width of the chart containers */
+  height: 300px; /* Adjust the height of the chart containers */
+  margin-bottom: 20px; /* Add margin between the charts */
+}
+
 
 h1 {
   color: navy; /* Text color */
   font-size: 48px; /* Font size */
+  font-family: "Julius Sans One", sans-serif; /* Font family */
+  text-align: center; /* Text alignment */
+}
+h2 {
+  color: navy; /* Text color */
+  font-size: 36px; /* Font size */
+  font-family: "Julius Sans One", sans-serif; /* Font family */
+  text-align: center; /* Text alignment */
+}
+h3 {
+  color: navy; /* Text color */
+  font-size: 24px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
 }
