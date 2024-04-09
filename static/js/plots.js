@@ -41,6 +41,48 @@ document.addEventListener('DOMContentLoaded', function() {
             L.circle([48.8566, 2.3522], {color: 'red'}).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
             L.circle([47.49640911675406, 19.052025412029728], {color: 'red'}).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
 
+            // Create bar chart
+            var ctx2 = document.getElementById('myChart2').getContext('2d');
+            scatterChart2 = new Chart(ctx2, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Rental Price vs Guest Rating',
+                        data: [], // Initially empty data
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
+                    }]
+                },
+                options: {
+                    // Set the desired width and height of the chart
+                    maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
+                    responsive: false, // Disable responsiveness
+                    width: 2500,
+                    height: 800,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Guest Rating'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Rental Prices (for two nights)'
+                            }
+                        }
+                    }
+                }
+            });            
+
+
+
+
+
             // Create scatter plot chart
             var ctx = document.getElementById('myChart').getContext('2d');
             scatterChart = new Chart(ctx, {
@@ -85,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Clear previous data
                 scatterChart.data.datasets[0].data = [];
+                scatterChart2.data.datasets[0].data = [];
 
                 data.forEach(function(row) {
 
@@ -98,9 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: &euro;${row[3].toFixed(2)}</h3>`).addTo(myMap);
                         // Add data to scatter plot
                         scatterChart.data.datasets[0].data.push({ x: row[15], y: row[3] });
+                        scatterChart2.data.datasets[0].data.push({ x: row[12], y: row[3] });
                     }
                 });
                 scatterChart.update(); // Update the scatter plot
+                scatterChart2.update();
                 myMap.setView(changeMap(document.getElementById("city").value), 12)
             } // end of onButtonClick
 
