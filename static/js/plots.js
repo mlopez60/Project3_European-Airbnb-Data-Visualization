@@ -30,10 +30,52 @@ document.addEventListener('DOMContentLoaded', function() {
             L.circle([48.8566, 2.3522]).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
             L.circle([47.49640911675406, 19.052025412029728]).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
             
+            // Get canvas element to render the scatter plot
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Create scatter chart
+            let scatterChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Rental Price vs Distance',
+                        data: rentalPrices.map((value, index) => ({ x: value, y: distances[index] })),
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
+                    }]
+                },
+                options: {
+                     // Set the desired width and height of the chart
+                    maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
+                    responsive: false, // Disable responsiveness
+                    width: 2500,
+                    height: 800,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Rental Price'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Distance'
+                            }
+                        }
+                    }
+                }
+            });
+
+
+
             function onButtonClick() {
                 // Loop through the array.
                 // Create arrays to store data for scatter plot
-                scatterChart.destroy()
+                // scatterChart.destroy()
                 data.forEach(function(row) {
                     
                     // conditionals applied from drop-down menu
@@ -60,45 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             distances.push(row[15]);}
                         });
 
-                        // Get canvas element to render the scatter plot
-                        var ctx = document.getElementById('myChart').getContext('2d');
-
-                        // Create scatter chart
-                        let scatterChart = new Chart(ctx, {
-                            type: 'scatter',
-                            data: {
-                                datasets: [{
-                                    label: 'Rental Price vs Distance',
-                                    data: rentalPrices.map((value, index) => ({ x: value, y: distances[index] })),
-                                    backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
-                                }]
-                            },
-                            options: {
-                                 // Set the desired width and height of the chart
-                                maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
-                                responsive: false, // Disable responsiveness
-                                width: 2500,
-                                height: 800,
-                                scales: {
-                                    x: {
-                                        type: 'linear',
-                                        position: 'bottom',
-                                        title: {
-                                            display: true,
-                                            text: 'Rental Price'
-                                        }
-                                    },
-                                    y: {
-                                        type: 'linear',
-                                        position: 'left',
-                                        title: {
-                                            display: true,
-                                            text: 'Distance'
-                                        }
-                                    }
-                                }
-                            }
-                        });
+                        
                     }
                 myMap.setView(changeMap(document.getElementById("city").value), 10)
                 });
@@ -122,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById("host_is_superhost").value = ""; // Replace "" with the default value for host_is_superhost dropdown
                 document.getElementById("person_capacity").value = ""; // Replace "" with the default value for person_capacity dropdown
                 myMap.setView(new L.LatLng(45.4642, 9.1900), 5)
-                removeData(scatterChart)
                 // Remove all markers from the map
                 clearMarkers();
             }
