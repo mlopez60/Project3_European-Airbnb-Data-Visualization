@@ -1,5 +1,6 @@
-// Define scatterChart variable outside of the event listener functions to make it accessible globally
+// Define scatterChart & barChart variables outside of the event listener functions to make it accessible globally
 let scatterChart;
+let barChart;
 
 // Wait for the DOM to be fully loaded before executing the code
 document.addEventListener('DOMContentLoaded', function() {
@@ -41,18 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
             L.circle([48.8566, 2.3522], {color: 'red'}).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
             L.circle([47.49640911675406, 19.052025412029728], {color: 'red'}).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
 
+            // Predefine the bins for the x-axis
+            const binLabels = ['75 - 80', '81 - 85', '86 - 90', '91 - 93', '94 - 96', '97 - 99', '100'];
+
             // Create bar chart - Rental Price vs Guest Rating
             var ctx2 = document.getElementById('myChart2').getContext('2d');
             ctx2.canvas.width = 500;
             ctx2.canvas.height = 300;
-            scatterChart2 = new Chart(ctx2, {
-                type: 'scatter',
+            barChart = new Chart(ctx2, {
+                type: 'bar',
                 data: {
+                    labels: binLabels, // Specify the bin labels for the x-axis
                     datasets: [{
-                        label: 'Rental Price vs Guest Satisfaction Rating',
-                        data: [], // Initially empty data
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
-                    }]
+                        label: 'Guest Satisfaction Ratings',
+                        data: new Array(binLabels.length).fill(0), // Initialize counts for each bin
+                        backgroundColor: 'rgba(0, 0, 128, 0.8)', // Customize the color of the bars, old color -> (255, 99, 132, 0.5)
+                    }] 
                 },
                 options: {
                     // Set the desired width and height of the chart
@@ -60,24 +65,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     responsive: false, // Disable responsiveness
                     scales: {
                         x: {
-                            type: 'linear',
                             position: 'bottom',
                             title: {
                                 display: true,
-                                text: 'Guest Rating'
+                                text: 'Guest Rating Bins'
                             }
                         },
                         y: {
-                            type: 'linear',
+                            beginAtZero: true,
                             position: 'left',
                             title: {
                                 display: true,
-                                text: 'Rental Prices (for two nights)'
+                                text: 'Count'
                             }
                         }
                     }
                 }
-            });            
+            });
+            
+            // Ensure the bar chart is initialized properly
+            console.log(barChart); // Log the barChart object to the console to check if it's properly initialized
 
 
             // Create scatter plot chart - Rental Price vs Distance to City Center
@@ -90,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     datasets: [{
                         label: 'Rental Price vs Distance to City Center',
                         data: [], // Initially empty data
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
+                        backgroundColor: 'rgba(0, 0, 128, 0.8)', // Customize the color of the points
                     }]
                 },
                 options: {
@@ -117,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
+            
 
             function onButtonClick() {
                 // Loop through the array.
@@ -124,7 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Clear previous data
                 scatterChart.data.datasets[0].data = [];
-                scatterChart2.data.datasets[0].data = [];
+                barChart.data.datasets[0].data = [];
+
+                // Define the bins and their ranges
+                const bins = [
+                    { range: [75, 80], count: 0 },
+                    { range: [81, 85], count: 0 },
+                    { range: [86, 90], count: 0 },
+                    { range: [91, 93], count: 0 },
+                    { range: [94, 96], count: 0 },
+                    { range: [97, 99], count: 0 },
+                    { range: [100, 100], count: 0 }
+                ];
 
                 data.forEach(function(row) {
 
@@ -138,11 +157,34 @@ document.addEventListener('DOMContentLoaded', function() {
                         L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: &euro;${row[3].toFixed(2)}</h3>`).addTo(myMap);
                         // Add data to scatter plot
                         scatterChart.data.datasets[0].data.push({ x: row[15], y: row[3] });
-                        scatterChart2.data.datasets[0].data.push({ x: row[12], y: row[3] });
+                        
+                        // Categorize the score into the appropriate bin
+                        var score = row[12]; // Assuming row[12] contains the guest satisfaction score
+                        for (var bin of bins) {
+                            if (score >= bin.range[0] && score <= bin.range[1]) {
+                                bin.count++; // Increment the count for the bin
+                                break; // Break the loop once the score is categorized
+                            }
+                        }
                     }
                 });
+
+                // Log the counts for each bin
+                bins.forEach((bin, index) => {
+                    console.log(`Bin ${index + 1} (${bin.range[0]} - ${bin.range[1]}): ${bin.count}`);
+                });
+
+                // Extract counts from the bins and push them to the bar chart dataset
+                var counts = bins.map(bin => bin.count);
+                console.log("Counts:", counts);
+
+                barChart.data.datasets[0].data = counts;
+
+                // Log the updated bar chart dataset
+                console.log("Bar Chart Dataset:", barChart.data.datasets[0].data);
+
                 scatterChart.update(); // Update the scatter plot
-                scatterChart2.update();
+                barChart.update();
                 myMap.setView(changeMap(document.getElementById("city").value), 12)
             } // end of onButtonClick
 
@@ -167,6 +209,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Clear scatter plot data
                 scatterChart.data.datasets[0].data = [];
                 scatterChart.update(); // Update the scatter plot
+                // Clear bar chart data
+                barChart.data.datasets[0].data = [];
+                barChart.update(); // Update the scatter plot
             }
 
             function changeMap(city){
@@ -203,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
                 }
 
-            const button = document.querySelector('button');
+            const button = document.querySelector('#button');
             button.addEventListener('click', onButtonClick);
 
             const clearButton = document.getElementById('clearButton');
