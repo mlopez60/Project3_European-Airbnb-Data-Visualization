@@ -14,12 +14,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 zoom: 5
             });
 
-            // Add a tile layer with English labels only.
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            // Add the tile layers
+            let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                maxZoom: 19,
-                language: 'en' // Specify the language for labels
-            }).addTo(myMap);
+                maxZoom: 19
+            }).addTo(myMap)
+            let topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+                maxZoom: 19
+            });
+            let cycle = L.tileLayer('http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=cfa8580306864b06a147db3f4c0ba9cf', {
+                attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+                maxZoom: 19
+            });
+            let trans = L.tileLayer('http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=cfa8580306864b06a147db3f4c0ba9cf', {
+                attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+                maxZoom: 19
+            });
+
+            let baseMaps = {
+                Street: street,
+                Topography: topo,
+                Cycle: cycle,
+                Transport: trans
+            };
+
+            // Add tile layers to myMap
+            L.control.layers(baseMaps).addTo(myMap);
 
             L.circle([52.36857095042522, 4.900577232906863], { radius: 10000 }).bindPopup(`<h2>Amsterdam</h2>`).addTo(myMap);
             L.circle([38.7233, -9.1371], { radius: 10000 }).bindPopup(`<h2>Lisbon</h2>`).addTo(myMap);
