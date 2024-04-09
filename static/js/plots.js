@@ -82,9 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
-            
-            // Ensure the bar chart is initialized properly
-            console.log(barChart); // Log the barChart object to the console to check if it's properly initialized
 
 
             // Create scatter plot chart - Rental Price vs Distance to City Center
@@ -127,10 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
 
             function onButtonClick() {
-                // Loop through the array.
-                // Create arrays to store data for scatter plot
-
-                // Clear previous data
+                // Clear previous graph data
                 scatterChart.data.datasets[0].data = [];
                 barChart.data.datasets[0].data = [];
 
@@ -169,19 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Log the counts for each bin
-                bins.forEach((bin, index) => {
-                    console.log(`Bin ${index + 1} (${bin.range[0]} - ${bin.range[1]}): ${bin.count}`);
-                });
-
                 // Extract counts from the bins and push them to the bar chart dataset
                 var counts = bins.map(bin => bin.count);
                 console.log("Counts:", counts);
 
                 barChart.data.datasets[0].data = counts;
-
-                // Log the updated bar chart dataset
-                console.log("Bar Chart Dataset:", barChart.data.datasets[0].data);
 
                 scatterChart.update(); // Update the scatter plot
                 barChart.update();
