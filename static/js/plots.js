@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             function onButtonClick() {
                 // Loop through the array.
+                // Create arrays to store data for scatter plot
+                scatterChart.destroy()
                 data.forEach(function(row) {
+                    
                     // conditionals applied from drop-down menu
                     if (row[0] == document.getElementById("city").value && // city
                         row[1] == document.getElementById("rental_period").value && // rental_period
@@ -41,9 +44,66 @@ document.addEventListener('DOMContentLoaded', function() {
                         row[8] == document.getElementById("host_is_superhost").value) // super-host
                     {
                         L.marker([row[21], row[20]]).bindPopup(`<h2>Rental City: ${row[0]}</h2><h3>Rental Price: &euro;${row[3].toFixed(2)}</h3>`).addTo(myMap);
+                        // Create arrays to store data for scatter plot
+                        let rentalPrices = [];
+                        let distances = [];
+
+                        // Extract rental price and distance data from CSV data
+                        data.forEach(row => {
+                        if (row[0] == document.getElementById("city").value && // city
+                            row[1] == document.getElementById("rental_period").value && // rental_period
+                            row[4] == document.getElementById("room_type").value && // room_type
+                            row[7] == document.getElementById("person_capacity").value && // person_capacity
+                            row[8] == document.getElementById("host_is_superhost").value) // super-host
+                          { 
+                            rentalPrices.push(row[3]);
+                            distances.push(row[15]);}
+                        });
+
+                        // Get canvas element to render the scatter plot
+                        var ctx = document.getElementById('myChart').getContext('2d');
+
+                        // Create scatter chart
+                        let scatterChart = new Chart(ctx, {
+                            type: 'scatter',
+                            data: {
+                                datasets: [{
+                                    label: 'Rental Price vs Distance',
+                                    data: rentalPrices.map((value, index) => ({ x: value, y: distances[index] })),
+                                    backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
+                                }]
+                            },
+                            options: {
+                                 // Set the desired width and height of the chart
+                                maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
+                                responsive: false, // Disable responsiveness
+                                width: 2500,
+                                height: 800,
+                                scales: {
+                                    x: {
+                                        type: 'linear',
+                                        position: 'bottom',
+                                        title: {
+                                            display: true,
+                                            text: 'Rental Price'
+                                        }
+                                    },
+                                    y: {
+                                        type: 'linear',
+                                        position: 'left',
+                                        title: {
+                                            display: true,
+                                            text: 'Distance'
+                                        }
+                                    }
+                                }
+                            }
+                        });
                     }
-                });
                 myMap.setView(changeMap(document.getElementById("city").value), 10)
+                });
+
+            // myMap.setView(changeMap(document.getElementById("city").value), 10)
             } // end of onButtonClick
 
             function clearMarkers() {
@@ -62,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById("host_is_superhost").value = ""; // Replace "" with the default value for host_is_superhost dropdown
                 document.getElementById("person_capacity").value = ""; // Replace "" with the default value for person_capacity dropdown
                 myMap.setView(new L.LatLng(45.4642, 9.1900), 5)
+                removeData(scatterChart)
                 // Remove all markers from the map
                 clearMarkers();
             }
@@ -100,59 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
                 }
 
-            // Create arrays to store data for scatter plot
-            const rentalPrices = [];
-            const distances = [];
 
-            // Extract rental price and distance data from CSV data
-            data.forEach(row => {
-                distances.push(row[15]);
-                rentalPrices.push(row[3]);
-            });
-
-            // Get canvas element to render the scatter plot
-            const ctx = document.getElementById('myChart').getContext('2d');
-
-            // Create scatter chart
-            // Specify the desired width and height of the chart
-            const chartWidth = 2500;
-            const chartHeight = 800;
-
-            const scatterChart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Rental Price vs Distance to City Center',
-                        data: distances.map((value, index) => ({ x: value, y: rentalPrices[index] })),
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
-                    }]
-                },
-                options: {
-                    // Set the desired width and height of the chart
-                    maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
-                    responsive: false, // Disable responsiveness
-                    width: chartWidth,
-                    height: chartHeight,
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'bottom',
-                            title: {
-                                display: true,
-                                text: 'Distance (meters)'
-                            }
-                        },
-                        y: {
-                            type: 'linear',
-                            position: 'left',
-                            title: {
-                                display: true,
-                                text: 'Rental Price'
-                            }
-                        }
-                    }
-                }
-            });
 
             const button = document.querySelector('button');
             button.addEventListener('click', onButtonClick);
@@ -164,4 +173,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+        function removeData(chart) {
+            chart.data.labels.pop();
+            chart.data.datasets.forEach((data) => {
+                data.data.pop();
+            });
+            chart.update();
+        }
 });
