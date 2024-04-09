@@ -26,6 +26,7 @@
 
     <!-- Include your JavaScript file -->
     <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
+
     <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -91,7 +92,6 @@ select:focus {
 <body>
 
     <h1>Airbnb Rentals for 10 Major European Cities </h1>
-    <br>
     <p>Select search criteria from drop down menus below</p>
     <div class="container">
         <!-- First dropdown select -->
@@ -145,18 +145,24 @@ select:focus {
     <div class="button-container">
       <button id="button">View Airbnbs</button>
       <button id="clearButton">Clear</button>
-  </div>
+    </div>
 
     <br>
 
-    <div id="barchart"></div>
+    <div id="boxes">
+      <div id="leftbox">
+          <div id="map"></div>
+      </div>
+      <div id="rightbox">
+        <canvas id="myChart" width="2500" height="800"></canvas>
+        <canvas id="myChart2" width="2500" height="800"></canvas>
+        <div id="barchart"></div>
+      </div>
+    </div>      
     
-    <canvas id="myChart" width="2500" height="800"></canvas>
-    <canvas id="myChart2" width="2500" height="800"></canvas>
-        
-    <div id="map"></div>
-
     <script src="plots.js"></script>
+
+    
 
 </body>
 

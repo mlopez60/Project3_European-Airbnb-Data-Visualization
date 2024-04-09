@@ -41,13 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
             L.circle([48.8566, 2.3522], {color: 'red'}).bindPopup(`<h2>Paris</h2>`).addTo(myMap);
             L.circle([47.49640911675406, 19.052025412029728], {color: 'red'}).bindPopup(`<h2>Budapest</h2>`).addTo(myMap);
 
-            // Create bar chart
+            // Create bar chart - Rental Price vs Guest Rating
             var ctx2 = document.getElementById('myChart2').getContext('2d');
+            ctx2.canvas.width = 500;
+            ctx2.canvas.height = 300;
             scatterChart2 = new Chart(ctx2, {
                 type: 'scatter',
                 data: {
                     datasets: [{
-                        label: 'Rental Price vs Guest Rating',
+                        label: 'Rental Price vs Guest Satisfaction Rating',
                         data: [], // Initially empty data
                         backgroundColor: 'rgba(255, 99, 132, 0.5)', // Customize the color of the points
                     }]
@@ -56,8 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Set the desired width and height of the chart
                     maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
                     responsive: false, // Disable responsiveness
-                    width: 2500,
-                    height: 800,
                     scales: {
                         x: {
                             type: 'linear',
@@ -80,11 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });            
 
 
-
-
-
-            // Create scatter plot chart
+            // Create scatter plot chart - Rental Price vs Distance to City Center
             var ctx = document.getElementById('myChart').getContext('2d');
+            ctx.canvas.width = 500;
+            ctx.canvas.height = 300;
             scatterChart = new Chart(ctx, {
                 type: 'scatter',
                 data: {
@@ -98,8 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Set the desired width and height of the chart
                     maintainAspectRatio: false, // Disable aspect ratio for manual width and height control
                     responsive: false, // Disable responsiveness
-                    width: 2500,
-                    height: 800,
                     scales: {
                         x: {
                             type: 'linear',
