@@ -1,7 +1,9 @@
 /* Remove the default margin and padding from the body. */
+
 body {
-  padding: 10px;
-  margin: 0;
+  background-image: url('../../Resources/background.png');
+  background-size: cover; 
+  background-position: center;
 }
 
 /* Adjust the width of the left and right boxes */
@@ -109,4 +111,28 @@ border-color: #555; /* Change border color when focused */
 padding: 10px;  
 text-align: center;
 }
+
+/* Default styles for links */
+a {
+  font-weight: bold; /* Make the links bold */
+  font-size: 24px; /* Font size */
+  font-family: "Julius Sans One", sans-serif; /* Font family */
+  color: blue; /* Set the initial color to blue */
+  text-decoration: none; /* Remove underline */
+}
+.center {
+  text-align: center;
+}
+/* Styles for links when hovered */
+a:hover {
+  text-decoration: underline; /* Underline the links on hover */
+}
+
+/* Styles for links when clicked */
+a:active,
+a:focus {
+  font-style: italic; /* Make the links italic */
+  color: red; /* Set the color to red when clicked */
+}
+
 
