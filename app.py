@@ -56,6 +56,10 @@ def insert_dummy_data():
     conn.close()
 
 @app.route('/')
+def homepage():
+    return render_template('home.html')
+
+@app.route('/visuals')
 def index():
     return render_template('index.html')
 
