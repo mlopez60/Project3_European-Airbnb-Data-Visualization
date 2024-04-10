@@ -4,7 +4,6 @@
 /* Adjust the width of the left and right boxes */
 #leftbox {
   float: left;
-  /* background: white; */
   width: 50%;
   height: 650px;
   display: flex; /* Use flexbox layout */
@@ -14,7 +13,6 @@
 
 #rightbox {
   float: right;
-  /* background: white; */
   width: 50%;
   height: 650px;
   display: flex; /* Use flexbox layout */
@@ -25,7 +23,7 @@
 
 /* Adjust the size of the map container */
 #map{
-  height: 600px; /* Adjust the height of the map as needed */
+  height: 600px; 
   width: 90%; /* Adjust the width of the map container */
   border-style: solid;
 }
@@ -40,7 +38,7 @@
 
 
 h1 {
-  color: #333); /* Text color */
+  color: #152450; /* Text color */
   font-size: 48px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
@@ -58,7 +56,7 @@ h3 {
   text-align: center; /* Text alignment */
 }
 h4 {
-  color: #333; /* Text color */
+  color: #152450; /* Text color */
   font-size: 48px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
