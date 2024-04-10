@@ -80,7 +80,3 @@ if __name__ == '__main__':
     create_table()
     insert_dummy_data()
     app.run(debug=True)
-
-
-# have csv files and want to dump that data into a table
-    # loaddata point to name of file and specify files 

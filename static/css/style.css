@@ -1,10 +1,7 @@
-/* Remove the default margin and padding from the body. */
-
-
 /* Adjust the width of the left and right boxes */
 #leftbox {
   float: left;
-  width: 50%;
+  width: 62%;
   height: 650px;
   display: flex; /* Use flexbox layout */
   justify-content: center; /* Align content horizontally to the center */
@@ -13,7 +10,7 @@
 
 #rightbox {
   float: right;
-  width: 50%;
+  width: 38%;
   height: 650px;
   display: flex; /* Use flexbox layout */
   flex-direction: column; /* Stack elements vertically */
