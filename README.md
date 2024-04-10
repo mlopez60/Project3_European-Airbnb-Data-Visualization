@@ -12,8 +12,8 @@ Plot Airbnb Price vs Cleanliness/Guest Satisfaction
 Dataset: Airbnb Prices in European Cities (https://www.kaggle.com/datasets/thedevastator/airbnb-prices-in-european-cities/data?select=amsterdam_weekends.csv)
 
 Routes:
-/ - Home Page
-/visuals - Visuals Page
+/ - Home Page - Project description, Data Source, Routes
+/visuals - Visuals Page - Select all filters 
 /data - Raw Data Page
 
 
