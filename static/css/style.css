@@ -40,27 +40,32 @@
 
 
 h1 {
-  color: rgb(53, 53, 53); /* Text color */
+  color: #333); /* Text color */
   font-size: 48px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
 }
 h2 {
-  color: rgb(53, 53, 53); /* Text color */
+  color: #333; /* Text color */
   font-size: 36px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
 }
 h3 {
-  color: rgb(53, 53, 53)grey; /* Text color */
+  color: #333; /* Text color */
   font-size: 24px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
 }
-
+h4 {
+  color: #333; /* Text color */
+  font-size: 48px; /* Font size */
+  font-family: "Julius Sans One", sans-serif; /* Font family */
+  text-align: center; /* Text alignment */
+}
 /* CSS styles for p element */
 p {
-  color: rgb(0, 9, 128); /* Text color */
+  color: #333; /* Text color */
   font-size: 24px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
