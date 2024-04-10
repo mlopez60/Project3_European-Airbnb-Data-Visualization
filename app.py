@@ -59,6 +59,10 @@ def insert_dummy_data():
 def homepage():
     return render_template('home.html')
 
+@app.route('/backend')
+def backend():
+    return render_template('backend.html')
+
 @app.route('/visuals')
 def index():
     return render_template('index.html')
