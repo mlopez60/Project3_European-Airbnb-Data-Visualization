@@ -1,15 +1,10 @@
 /* Remove the default margin and padding from the body. */
 
-body {
-  background-image: url('../../Resources/background.png');
-  background-size: cover; 
-  background-position: center;
-}
 
 /* Adjust the width of the left and right boxes */
 #leftbox {
   float: left;
-  background: white;
+  /* background: white; */
   width: 50%;
   height: 650px;
   display: flex; /* Use flexbox layout */
@@ -19,7 +14,7 @@ body {
 
 #rightbox {
   float: right;
-  background: white;
+  /* background: white; */
   width: 50%;
   height: 650px;
   display: flex; /* Use flexbox layout */
@@ -45,19 +40,19 @@ body {
 
 
 h1 {
-  color: navy; /* Text color */
+  color: rgb(53, 53, 53); /* Text color */
   font-size: 48px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
 }
 h2 {
-  color: navy; /* Text color */
+  color: rgb(53, 53, 53); /* Text color */
   font-size: 36px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
 }
 h3 {
-  color: navy; /* Text color */
+  color: rgb(53, 53, 53)grey; /* Text color */
   font-size: 24px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
   text-align: center; /* Text alignment */
@@ -117,7 +112,7 @@ a {
   font-weight: bold; /* Make the links bold */
   font-size: 24px; /* Font size */
   font-family: "Julius Sans One", sans-serif; /* Font family */
-  color: blue; /* Set the initial color to blue */
+  color: navy; /* Set the initial color to blue */
   text-decoration: none; /* Remove underline */
 }
 .center {
@@ -132,7 +127,7 @@ a:hover {
 a:active,
 a:focus {
   font-style: italic; /* Make the links italic */
-  color: red; /* Set the color to red when clicked */
+  color: rgb(119, 0, 0); /* Set the color to red when clicked */
 }
 
 
